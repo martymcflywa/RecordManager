@@ -13,4 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RecordGenerator\RecordGenerator.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+  </ItemGroup>
 </Project>
