@@ -1,7 +1,10 @@
-﻿using System;
+﻿﻿using System;
 
 namespace RecordGenerator
 {
+    /// <summary>
+    /// Model of the record to read/write to file.
+    /// </summary>
     public class Record
     {
         public int SequenceId { get; }
