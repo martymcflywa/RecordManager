@@ -1,9 +1,9 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\FileManager.csproj", "{AD9576EA-07CA-43DD-9836-DC94F249E4C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordGenerator", "RecordGenerator\RecordGenerator.csproj", "{AD9576EA-07CA-43DD-9836-DC94F249E4C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManagerTest", "FileManagerTest\FileManagerTest.csproj", "{FE8E1B07-F91E-4C4B-8525-7337400709C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordGeneratorTest", "RecordGeneratorTest\RecordGeneratorTest.csproj", "{FE8E1B07-F91E-4C4B-8525-7337400709C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
