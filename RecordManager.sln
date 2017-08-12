@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordGenerator", "RecordGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordGeneratorTest", "RecordGeneratorTest\RecordGeneratorTest.csproj", "{FE8E1B07-F91E-4C4B-8525-7337400709C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\FileManager.csproj", "{96F798EF-F5B0-4FA8-9369-E131B1C060DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManagerTest", "FileManagerTest\FileManagerTest.csproj", "{DBDB1871-F9BB-4F46-9F53-FC0676309545}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +23,13 @@ Global
 		{FE8E1B07-F91E-4C4B-8525-7337400709C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE8E1B07-F91E-4C4B-8525-7337400709C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE8E1B07-F91E-4C4B-8525-7337400709C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96F798EF-F5B0-4FA8-9369-E131B1C060DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96F798EF-F5B0-4FA8-9369-E131B1C060DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96F798EF-F5B0-4FA8-9369-E131B1C060DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96F798EF-F5B0-4FA8-9369-E131B1C060DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBDB1871-F9BB-4F46-9F53-FC0676309545}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBDB1871-F9BB-4F46-9F53-FC0676309545}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBDB1871-F9BB-4F46-9F53-FC0676309545}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBDB1871-F9BB-4F46-9F53-FC0676309545}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
