@@ -13,4 +13,8 @@
   <ItemGroup>
     <Folder Include="src\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileManager\FileManager.csproj" />
+    <ProjectReference Include="..\RecordGenerator\RecordGenerator.csproj" />
+  </ItemGroup>
 </Project>
