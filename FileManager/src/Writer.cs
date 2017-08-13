@@ -7,9 +7,6 @@ namespace FileManager
 {
     public static class Writer
     {
-        static string FILENAME_FORMAT = "Records_{0}_{1}.dat";
-        static string ZERO_PADDING = "D3";
-
         public static void Write(this IEnumerable<Record> records, FileStream stream, int offset)
         {
             var _bytes = new byte[RecordStructure.LENGTH];
@@ -37,33 +34,39 @@ namespace FileManager
             }
         }
 
-        public static int Write(this Record record, FileStream stream)
+        public static void Write(this Record record, FileStream stream)
         {
-            var length = 0;
-
             var sequenceIdBytes = BitConverter.GetBytes(record.SequenceId);
             stream.Write(sequenceIdBytes, 0, sequenceIdBytes.Length);
-            length += sequenceIdBytes.Length - 1;
 
             var aggregateTypeIdByte = BitConverter.GetBytes(record.AggregateTypeId);
             stream.Write(aggregateTypeIdByte, 0, aggregateTypeIdByte.Length);
-            length += aggregateTypeIdByte.Length - 1;
 
             var messageTypeIdByte = BitConverter.GetBytes(record.MessageTypeId);
             stream.Write(messageTypeIdByte, 0, messageTypeIdByte.Length);
-            length += messageTypeIdByte.Length - 1;
 
             var timestampBytes = BitConverter.GetBytes(record.Timestamp);
             stream.Write(timestampBytes, 0, timestampBytes.Length);
-            length += timestampBytes.Length - 1;
 
             stream.Flush();
-            return length;
         }
 
         public static bool IsNewFileRequired(FileStream stream, int maxSize)
         {
             return stream.Length > maxSize;
+        }
+
+        public static FileStream CreateNewFile(
+            FileStream stream,
+            string path,
+            string filenameFormat,
+            string zeroPad,
+            int currentFileCount)
+        {
+            stream.Dispose();
+            var filename = String.Format(filenameFormat, (currentFileCount + 1).ToString(zeroPad));
+            var filepath = Path.Combine(path, filename);
+            return new FileStream(filepath, FileMode.Create);
         }
     }
 }

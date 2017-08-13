@@ -73,8 +73,7 @@ namespace FileManagerTest
                 {
                     if (Writer.IsNewFileRequired(stream, maxFileSize))
                     {
-                        stream.Dispose();
-                        stream = CreateNewFile(path, filenameFormat, zeroPadding, currentFileCount);
+                        stream = Writer.CreateNewFile(stream, path, filenameFormat, zeroPadding, currentFileCount);
                         currentFileCount++;
                     }
                     record.Write(stream);
@@ -84,18 +83,6 @@ namespace FileManagerTest
             {
                 stream.Dispose();
             }
-
-        }
-
-        FileStream CreateNewFile(
-            string path,
-            string filenameFormat,
-            string zeroPadding,
-            int currentFileCount)
-        {
-            var filename = String.Format(filenameFormat, (currentFileCount + 1).ToString(zeroPadding));
-            var filepath = Path.Combine(path, filename);
-            return new FileStream(filepath, FileMode.Create);
         }
     }
 }
