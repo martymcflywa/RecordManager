@@ -17,23 +17,23 @@ namespace RecordGeneratorTest
             var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
             var actual = Generator
-                .Get(initSequenceId, 
-                     aggregateTypeId, 
-                     messageTypeId, 
+                .Get(initSequenceId,
+                     aggregateTypeId,
+                     messageTypeId,
                      timestamp)
-                .Until(limit);
-            
+                .Take(limit);
+
             Assert.NotEmpty(actual);
 
             var list = new List<RecordGenerator.Record>(actual);
             Assert.True(list.Count == limit);
 
-            foreach(var item in actual)
+            foreach (var item in actual)
             {
                 Assert.Equal(initSequenceId++, item.SequenceId);
                 Assert.Equal(aggregateTypeId, item.AggregateTypeId);
                 Assert.Equal(messageTypeId, item.MessageTypeId);
-                Assert.Equal(timestamp, item.Timestamp);
+                Assert.Equal(timestamp++, item.Timestamp);
             }
         }
     }
