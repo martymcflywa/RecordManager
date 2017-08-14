@@ -9,9 +9,9 @@ namespace FileManagerTest
     public class WriterTest
     {
         [Fact]
-        public void WriteMultipleFiles()
+        public void Write()
         {
-            var recordLimit = 5000;
+            var recordLimit = 5;
             var initSequenceId = 1;
             var aggregateTypeId = (byte)20;
             var messageTypeId = (byte)13;
@@ -27,15 +27,36 @@ namespace FileManagerTest
             var filenameFormat = "Records_{0}.dat";
             var zeroPad = "D3";
 
-            var maxSize = 1000;
-            var currentFileCount = 0;
+            var fileCount = 1;
 
-            var path = Directory.GetCurrentDirectory();
-            var filename = String.Format(filenameFormat, (currentFileCount + 1).ToString(zeroPad));
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "test");
+            Directory.CreateDirectory(path);
+            var filename = String.Format(filenameFormat, (fileCount).ToString(zeroPad));
             var filepath = Path.Combine(path, filename);
-            var stream = new FileStream(filepath, FileMode.Create);
 
-            records.Write(stream, maxSize, path, filenameFormat, zeroPad);
+            using (var stream = new FileStream(filepath, FileMode.CreateNew))
+            {
+                foreach (var record in records)
+                {
+                    record.Write(stream);
+                }
+            }
+
+            var expectedSize = recordLimit * RecordStructure.LENGTH;
+
+            Assert.True(File.Exists(filepath));
+            Assert.Equal(expectedSize, new FileInfo(filepath).Length);
+            Teardown(path);
+        }
+
+        void Teardown(string path)
+        {
+            var files = Directory.GetFiles(path);
+            foreach (var file in files)
+            {
+                File.Delete(file);
+            }
+            Directory.Delete(path);
         }
     }
 }

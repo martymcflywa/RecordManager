@@ -7,27 +7,6 @@ namespace FileManager
 {
     public static class Writer
     {
-        public static void Write(this IEnumerable<Record> records, FileStream stream, int maxSize, string path, string filenameFormat, string zeroPad)
-        {
-            try
-            {
-                var fileCount = 0;
-                foreach (var record in records)
-                {
-                    if(IsNewFileRequired(stream, maxSize))
-                    {
-                        stream = CreateNewFile(stream, path, filenameFormat, zeroPad, fileCount);
-                        fileCount++;
-                    }
-                    record.Write(stream);
-                }
-            }
-            finally
-            {
-                stream.Dispose();
-            }
-        }
-
         public static void Write(this Record record, FileStream stream)
         {
             var sequenceIdBytes = BitConverter.GetBytes(record.SequenceId);
@@ -43,24 +22,6 @@ namespace FileManager
             stream.Write(timestampBytes, 0, timestampBytes.Length);
 
             stream.Flush();
-        }
-
-        public static bool IsNewFileRequired(FileStream stream, int maxSize)
-        {
-            return stream.Length > maxSize;
-        }
-
-        public static FileStream CreateNewFile(
-            FileStream stream,
-            string path,
-            string filenameFormat,
-            string zeroPad,
-            int currentFileCount)
-        {
-            stream.Dispose();
-            var filename = String.Format(filenameFormat, (currentFileCount + 1).ToString(zeroPad));
-            var filepath = Path.Combine(path, filename);
-            return new FileStream(filepath, FileMode.Create);
         }
     }
 }

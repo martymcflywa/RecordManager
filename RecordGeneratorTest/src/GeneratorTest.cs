@@ -10,12 +10,6 @@ namespace RecordGeneratorTest
         [Fact]
         public void Get()
         {
-            //Generate data
-            //loop through data
-            //  write to file
-            //  until file size =1k
-            //end loop
-
             var limit = 10;
             var initSequenceId = 1;
             var aggregateTypeId = (byte)5;
@@ -39,7 +33,7 @@ namespace RecordGeneratorTest
                 Assert.Equal(initSequenceId++, item.SequenceId);
                 Assert.Equal(aggregateTypeId, item.AggregateTypeId);
                 Assert.Equal(messageTypeId, item.MessageTypeId);
-                Assert.Equal(timestamp, item.Timestamp);
+                Assert.Equal(timestamp++, item.Timestamp);
             }
         }
     }

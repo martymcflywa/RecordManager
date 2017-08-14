@@ -15,7 +15,7 @@ namespace RecordGenerator
         {
             while (true)
             {
-                yield return new Record(sequenceId++, aggregateTypeId, messageTypeId, timestamp);
+                yield return new Record(sequenceId++, aggregateTypeId, messageTypeId, timestamp++);
             }
         }
 
