@@ -7,30 +7,24 @@ namespace FileManager
 {
     public static class Writer
     {
-        public static void Write(this IEnumerable<Record> records, FileStream stream, int offset)
+        public static void Write(this IEnumerable<Record> records, FileStream stream, int maxSize, string path, string filenameFormat, string zeroPad)
         {
-            var _bytes = new byte[RecordStructure.LENGTH];
-            var _offset = offset;
-
-            foreach (var record in records)
+            try
             {
-                var sequenceIdBytes = BitConverter.GetBytes(record.SequenceId);
-                stream.Write(sequenceIdBytes, 0, sequenceIdBytes.Length);
-                _offset += sequenceIdBytes.Length - 1;
-
-                var aggregateTypeIdByte = BitConverter.GetBytes(record.AggregateTypeId);
-                stream.Write(aggregateTypeIdByte, 0, aggregateTypeIdByte.Length);
-                _offset += aggregateTypeIdByte.Length - 1;
-
-                var messageTypeIdByte = BitConverter.GetBytes(record.MessageTypeId);
-                stream.Write(messageTypeIdByte, 0, messageTypeIdByte.Length);
-                _offset += messageTypeIdByte.Length - 1;
-
-                var timestampBytes = BitConverter.GetBytes(record.Timestamp);
-                stream.Write(timestampBytes, 0, timestampBytes.Length);
-                _offset += timestampBytes.Length - 1;
-
-                stream.Flush();
+                var fileCount = 0;
+                foreach (var record in records)
+                {
+                    if(IsNewFileRequired(stream, maxSize))
+                    {
+                        stream = CreateNewFile(stream, path, filenameFormat, zeroPad, fileCount);
+                        fileCount++;
+                    }
+                    record.Write(stream);
+                }
+            }
+            finally
+            {
+                stream.Dispose();
             }
         }
 

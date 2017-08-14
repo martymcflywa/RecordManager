@@ -10,6 +10,12 @@ namespace RecordGeneratorTest
         [Fact]
         public void Get()
         {
+            //Generate data
+            //loop through data
+            //  write to file
+            //  until file size =1k
+            //end loop
+
             var limit = 10;
             var initSequenceId = 1;
             var aggregateTypeId = (byte)5;
