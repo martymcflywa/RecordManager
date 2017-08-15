@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using RecordGenerator;
 
 namespace FileManager
 {
@@ -10,7 +9,7 @@ namespace FileManager
         readonly string Path;
         readonly int MaxSize;
         FileStream Stream;
-        int FileCount = 0;
+        int FileCount;
 
         const string FILENAME_FORMAT = "Records_{0}.dat";
         const string PADDING = "D3";
@@ -19,6 +18,7 @@ namespace FileManager
         {
             Path = path;
             MaxSize = maxSize;
+            FileCount = 0;
 
             var filename = GetFilename();
             var filepath = System.IO.Path.Combine(filename, Path);

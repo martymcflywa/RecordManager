@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using FileManager;
 using RecordGenerator;
 using Xunit;
@@ -16,8 +17,9 @@ namespace FileManagerTest
             var aggregateTypeId = (byte)20;
             var messageTypeId = (byte)13;
             var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            var generator = new Generator();
 
-            var records = Generator
+            var records = generator
                 .Get(initSequenceId,
                      aggregateTypeId,
                      messageTypeId,
