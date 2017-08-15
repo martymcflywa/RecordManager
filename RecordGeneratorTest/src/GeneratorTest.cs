@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RecordGenerator;
 using Xunit;
 
@@ -15,8 +16,9 @@ namespace RecordGeneratorTest
             var aggregateTypeId = (byte)5;
             var messageTypeId = (byte)10;
             var timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            var generator = new Generator();
 
-            var actual = Generator
+            var actual = generator
                 .Get(initSequenceId,
                      aggregateTypeId,
                      messageTypeId,
@@ -25,7 +27,7 @@ namespace RecordGeneratorTest
 
             Assert.NotEmpty(actual);
 
-            var list = new List<RecordGenerator.Record>(actual);
+            var list = new List<FileManager.Record>(actual);
             Assert.True(list.Count == limit);
 
             foreach (var item in actual)

@@ -1,6 +1,4 @@
-﻿﻿using System;
-
-namespace RecordGenerator
+﻿namespace FileManager
 {
     /// <summary>
     /// Model of the record to read/write to file.
